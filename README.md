@@ -31,14 +31,11 @@ Testing with POSTMAN or similar.
   - For user
 
 ### Running
+  gradlew clean build  
+  gradlew bootRun  
 
-gradlew clean build
-
-gradlew bootRun
-
-App is running on http://localhost:7070/  
-
-Used technologies:
+Used technologies:  
 - Java - source compatibility 1.8
 - Gradle - 6.6.1
-- Spring - 2.3.4
+- Spring - 5.2.9.RELEASE
+- org.springframework.boot - 2.3.4.RELEASE
