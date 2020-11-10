@@ -34,68 +34,68 @@ import oAuth2.basics.security.MockAccessTokenService;
 @SpringBootTest
 public class HelloControllerIntegrationTest {
 
-	@Autowired
-	private MockMvc mvc;
+    @Autowired
+    private MockMvc mvc;
 
-	@Test
-	public void getHelloMessageForAdminTest() throws Exception {
-		MockAccessTokenService mockAccessTokenService = new MockAccessTokenService();
-		String accessToken = mockAccessTokenService.obtainAccessToken("admin", "adminp", mvc);
+    @Test
+    public void getHelloMessageForAdminTest() throws Exception {
+        MockAccessTokenService mockAccessTokenService = new MockAccessTokenService();
+        String accessToken = mockAccessTokenService.obtainAccessToken("admin", "adminp", mvc);
 
-		ResultActions result = mvc.perform(
-		        MockMvcRequestBuilders.get("/hello/admin")
-		        		.header("Content-Type", "application/json;charset=UTF-8")
-		                .header("Access-Control-Allow-Origin", "*")
-		                .header("Authorization", "Bearer " + accessToken));
+        ResultActions result = mvc.perform(
+                MockMvcRequestBuilders.get("/hello/admin")
+                        .header("Content-Type", "application/json;charset=UTF-8")
+                        .header("Access-Control-Allow-Origin", "*")
+                        .header("Authorization", "Bearer " + accessToken));
 
-		result.andExpect(status().isOk())
-			  .andExpect(content().string("Hello Master!"));
-	}
+        result.andExpect(status().isOk())
+              .andExpect(content().string("Hello Master!"));
+    }
 
-	@Test
-	public void getHelloMessageForUserTest() throws Exception {
-		MockAccessTokenService mockAccessTokenService = new MockAccessTokenService();
-		String accessToken = mockAccessTokenService.obtainAccessToken("user", "userp", mvc);
+    @Test
+    public void getHelloMessageForUserTest() throws Exception {
+        MockAccessTokenService mockAccessTokenService = new MockAccessTokenService();
+        String accessToken = mockAccessTokenService.obtainAccessToken("user", "userp", mvc);
 
-		ResultActions result = mvc.perform(
-		        MockMvcRequestBuilders.get("/hello/user")
-		        		.header("Content-Type", "application/json;charset=UTF-8")
-		                .header("Access-Control-Allow-Origin", "*")
-		                .header("Authorization", "Bearer " + accessToken));
+        ResultActions result = mvc.perform(
+                MockMvcRequestBuilders.get("/hello/user")
+                        .header("Content-Type", "application/json;charset=UTF-8")
+                        .header("Access-Control-Allow-Origin", "*")
+                        .header("Authorization", "Bearer " + accessToken));
 
-		result.andExpect(status().isOk())
-			  .andExpect(content().string("User huh..."));
-	}
+        result.andExpect(status().isOk())
+              .andExpect(content().string("User huh..."));
+    }
 
-	@Test
-	public void getHelloMessageTest() throws Exception {
-		MockAccessTokenService mockAccessTokenService = new MockAccessTokenService();
-		String accessToken = mockAccessTokenService.obtainAccessToken("user", "userp", mvc);
+    @Test
+    public void getHelloMessageTest() throws Exception {
+        MockAccessTokenService mockAccessTokenService = new MockAccessTokenService();
+        String accessToken = mockAccessTokenService.obtainAccessToken("user", "userp", mvc);
 
-		ResultActions result = mvc.perform(
-				MockMvcRequestBuilders.get("/hello")
-		        		.header("Content-Type", "application/json;charset=UTF-8")
-		                .header("Access-Control-Allow-Origin", "*")
-		                .header("Authorization", "Bearer " + accessToken));
+        ResultActions result = mvc.perform(
+                MockMvcRequestBuilders.get("/hello")
+                        .header("Content-Type", "application/json;charset=UTF-8")
+                        .header("Access-Control-Allow-Origin", "*")
+                        .header("Authorization", "Bearer " + accessToken));
 
-		result.andExpect(status().isOk())
-			  .andExpect(content().string("Hello!"));
-	}
+        result.andExpect(status().isOk())
+              .andExpect(content().string("Hello!"));
+    }
 
-	@Test
-	public void getHelloMessageTest_notAuthorized() throws Exception {
-		ResultActions result = mvc.perform(
-				MockMvcRequestBuilders.get("/hello"));
+    @Test
+    public void getHelloMessageTest_notAuthorized() throws Exception {
+        ResultActions result = mvc.perform(
+                MockMvcRequestBuilders.get("/hello"));
 
-		result.andExpect(status().is(401));
-	}
+        result.andExpect(status().is(401));
+    }
 
-	@Test
-	public void getHelloMessageWorldTest() throws Exception {
-		ResultActions result = mvc.perform(
-				MockMvcRequestBuilders.get("/hello/world"));
+    @Test
+    public void getHelloMessageWorldTest() throws Exception {
+        ResultActions result = mvc.perform(
+                MockMvcRequestBuilders.get("/hello/world"));
 
-		result.andExpect(status().isOk())
-			  .andExpect(content().string("Hello World!"));
-	}
+        result.andExpect(status().isOk())
+              .andExpect(content().string("Hello World!"));
+    }
 }

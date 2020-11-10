@@ -26,25 +26,25 @@ import org.springframework.util.MultiValueMap;
 
 public class MockAccessTokenService {
 
-	public String obtainAccessToken(String username, String password, MockMvc mvc) throws Exception {
+    public String obtainAccessToken(String username, String password, MockMvc mvc) throws Exception {
 
-		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-		params.add("grant_type", "password");
-		params.add("username", username);
-		params.add("password", password);
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.add("grant_type", "password");
+        params.add("username", username);
+        params.add("password", password);
 
-		ResultActions result = mvc.perform(
-				post("/oauth/token")
-					.params(params)
-					.with(httpBasic("tutorial-client", "tutorial-secret")));
+        ResultActions result = mvc.perform(
+                post("/oauth/token")
+                    .params(params)
+                    .with(httpBasic("tutorial-client", "tutorial-secret")));
 
-		result.andExpect(status().isOk())
-			  .andExpect(content().contentType("application/json;charset=UTF-8"));
+        result.andExpect(status().isOk())
+              .andExpect(content().contentType("application/json;charset=UTF-8"));
 
-		String resultString = result.andReturn().getResponse().getContentAsString();
+        String resultString = result.andReturn().getResponse().getContentAsString();
 
-		JacksonJsonParser jsonParser = new JacksonJsonParser();
-		return jsonParser.parseMap(resultString).get("access_token").toString();
-	}
+        JacksonJsonParser jsonParser = new JacksonJsonParser();
+        return jsonParser.parseMap(resultString).get("access_token").toString();
+    }
 
 }

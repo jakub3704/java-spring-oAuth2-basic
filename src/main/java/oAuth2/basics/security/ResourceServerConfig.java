@@ -23,17 +23,17 @@ import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHand
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
-	@Override
-	public void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-				.antMatchers("/").permitAll()
-				.antMatchers("/oauth/token").permitAll()
-		        .antMatchers("/hello").authenticated()
-		        .antMatchers("/hello/admin").hasAuthority("ADMIN")
-		        .antMatchers("/hello/user").hasAuthority("USER")
-		        .antMatchers("/hello/world").permitAll().and()
-		        .exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/").permitAll()
+                .antMatchers("/oauth/token").permitAll()
+                .antMatchers("/hello").authenticated()
+                .antMatchers("/hello/admin").hasAuthority("ADMIN")
+                .antMatchers("/hello/user").hasAuthority("USER")
+                .antMatchers("/hello/world").permitAll().and()
+                .exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
 
-		super.configure(http);
-	}
+        super.configure(http);
+    }
 }

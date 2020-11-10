@@ -20,41 +20,41 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 public class DummyUser {
-	String username;
-	String password;
-	List<SimpleGrantedAuthority> auth = new ArrayList<>();
+    String username;
+    String password;
+    List<SimpleGrantedAuthority> auth = new ArrayList<>();
 
-	public DummyUser(String username, String password, List<SimpleGrantedAuthority> auth) {
-		this.username = username;
-		this.password = password;
-		this.auth = auth;
-	}
+    public DummyUser(String username, String password, List<SimpleGrantedAuthority> auth) {
+        this.username = username;
+        this.password = password;
+        this.auth = auth;
+    }
 
-	public User toUser() {
-		return new User(username, password, true, true, true, true, auth);
-	}
+    public User toUser() {
+        return new User(username, password, true, true, true, true, auth);
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public List<SimpleGrantedAuthority> getAuth() {
-		return auth;
-	}
+    public List<SimpleGrantedAuthority> getAuth() {
+        return auth;
+    }
 
-	public void setAuth(List<SimpleGrantedAuthority> auth) {
-		this.auth = auth;
-	}
+    public void setAuth(List<SimpleGrantedAuthority> auth) {
+        this.auth = auth;
+    }
 }

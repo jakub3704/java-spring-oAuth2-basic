@@ -22,28 +22,28 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class DummyUsersList {
 
-	List<DummyUser> users = new ArrayList<>();
+    List<DummyUser> users = new ArrayList<>();
 
-	public DummyUsersList(PasswordEncoder passwordEncoder) {
-		createTestUsers(passwordEncoder);
-	}
+    public DummyUsersList(PasswordEncoder passwordEncoder) {
+        createTestUsers(passwordEncoder);
+    }
 
-	private void createTestUsers(PasswordEncoder passwordEncoder) {
-		if (users.isEmpty()) {
-			users.add(new DummyUser("admin", passwordEncoder.encode("adminp"),
-			        Arrays.asList(new SimpleGrantedAuthority("ADMIN"))));
-			users.add(new DummyUser("user", passwordEncoder.encode("userp"),
-			        Arrays.asList(new SimpleGrantedAuthority("USER"))));
-		}
-	}
+    private void createTestUsers(PasswordEncoder passwordEncoder) {
+        if (users.isEmpty()) {
+            users.add(new DummyUser("admin", passwordEncoder.encode("adminp"),
+                    Arrays.asList(new SimpleGrantedAuthority("ADMIN"))));
+            users.add(new DummyUser("user", passwordEncoder.encode("userp"),
+                    Arrays.asList(new SimpleGrantedAuthority("USER"))));
+        }
+    }
 
-	public DummyUser findUser(String username) {
-		for (DummyUser user : users) {
-			if (user.getUsername().equals(username)) {
-				return user;
-			}
-		}
-		return null;
-	}
+    public DummyUser findUser(String username) {
+        for (DummyUser user : users) {
+            if (user.getUsername().equals(username)) {
+                return user;
+            }
+        }
+        return null;
+    }
 
 }
