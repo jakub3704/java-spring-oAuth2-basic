@@ -36,10 +36,10 @@ public class MockAccessTokenService {
         ResultActions result = mvc
                 .perform(post("/oauth/token")
                             .params(params)
-                            .with(httpBasic("tutorial-client", "tutorial-secret"))
-                            .accept("application/json;charset=UTF-8"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType("application/json;charset=UTF-8"));
+                            .with(httpBasic("tutorial-client", "tutorial-secret")));
+                                         
+        result.andExpect(status().isOk())
+              .andExpect(content().contentType("application/json;charset=UTF-8"));
 
         String resultString = result.andReturn().getResponse().getContentAsString();
 
@@ -47,4 +47,4 @@ public class MockAccessTokenService {
         return jsonParser.parseMap(resultString).get("access_token").toString();
     }
 
-}
+}                          
