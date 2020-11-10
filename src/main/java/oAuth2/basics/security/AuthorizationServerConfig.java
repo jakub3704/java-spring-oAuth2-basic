@@ -28,44 +28,42 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
-    
-    private static final String CLIENT_ID = "tutorial-client";
-    private static final String CLIENT_SECRET = "tutorial-secret";
-    private static final String GRANT_TYPE_PASSWORD = "password";
-    private static final String AUTHORIZATION_CODE = "authorization_code";
-    private static final String REFRESH_TOKEN = "refresh_token";
-    private static final String SCOPE_READ = "read";
-    private static final String SCOPE_WRITE = "write";
-    private static final String TRUST = "trust";
-    private static final int ACCESS_TOKEN_VALIDITY = 10*60;
-    private static final int REFRESH_TOKEN_VALIDITY = 4*60*60;
-    
-    @Autowired
-    private AuthenticationManager authManager;
-        
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    
-    @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients
-                .inMemory()
-                .withClient(CLIENT_ID)
-                .secret(passwordEncoder.encode(CLIENT_SECRET))
-                .authorizedGrantTypes(GRANT_TYPE_PASSWORD, AUTHORIZATION_CODE, REFRESH_TOKEN)
-                .scopes(SCOPE_READ, SCOPE_WRITE, TRUST)
-                .accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY)
-                .refreshTokenValiditySeconds(REFRESH_TOKEN_VALIDITY);
-    }
-        
-    @Bean
-    public TokenStore tokenStore() {
-        return new InMemoryTokenStore();
-    }
 
-    @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-        endpoints.tokenStore(tokenStore())
-                .authenticationManager(authManager);
-    }
+	private static final String CLIENT_ID = "tutorial-client";
+	private static final String CLIENT_SECRET = "tutorial-secret";
+	private static final String GRANT_TYPE_PASSWORD = "password";
+	private static final String AUTHORIZATION_CODE = "authorization_code";
+	private static final String REFRESH_TOKEN = "refresh_token";
+	private static final String SCOPE_READ = "read";
+	private static final String SCOPE_WRITE = "write";
+	private static final String TRUST = "trust";
+	private static final int ACCESS_TOKEN_VALIDITY = 10 * 60;
+	private static final int REFRESH_TOKEN_VALIDITY = 4 * 60 * 60;
+
+	@Autowired
+	private AuthenticationManager authManager;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
+	@Override
+	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+		clients.inMemory()
+				.withClient(CLIENT_ID)
+				.secret(passwordEncoder.encode(CLIENT_SECRET))
+		        .authorizedGrantTypes(GRANT_TYPE_PASSWORD, AUTHORIZATION_CODE, REFRESH_TOKEN)
+		        .scopes(SCOPE_READ, SCOPE_WRITE, TRUST)
+		        .accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY)
+		        .refreshTokenValiditySeconds(REFRESH_TOKEN_VALIDITY);
+	}
+
+	@Bean
+	public TokenStore tokenStore() {
+		return new InMemoryTokenStore();
+	}
+
+	@Override
+	public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
+		endpoints.tokenStore(tokenStore()).authenticationManager(authManager);
+	}
 }

@@ -26,25 +26,25 @@ import oAuth2.basics.dummyuser.DummyUsersList;
 
 @Service
 public class MyUserDetailService implements UserDetailsService, InitializingBean {
-    
-    @Autowired
-    PasswordEncoder passwordEncoder;
-    
-    private DummyUsersList users;
-    
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = users.findUser(username).toUser();
 
-        if (user != null) {
-            return user;
-        } else {
-            throw new RuntimeException("- User with name \"username\" Not Found -");
-        }
-    }
+	@Autowired
+	PasswordEncoder passwordEncoder;
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-            users = new DummyUsersList(passwordEncoder);        
-    }
+	private DummyUsersList users;
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		User user = users.findUser(username).toUser();
+
+		if (user != null) {
+			return user;
+		} else {
+			throw new RuntimeException("- User with name \"username\" Not Found -");
+		}
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		users = new DummyUsersList(passwordEncoder);
+	}
 }

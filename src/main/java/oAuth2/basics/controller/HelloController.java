@@ -20,24 +20,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/hello")
 public class HelloController {
-   
-    @GetMapping("/admin")
-    public String getHelloMessageForAdmin(){
-        return "Hello Master!";
-    }
-    
-    @GetMapping("/user")
-    public String getHelloMessageForUser(){
-        return "User huh...";
-    }
-    
-    @GetMapping
-    public String getHelloMessage(){
-        return "Hello!";
-    }
-    
-    @GetMapping("/world")
-    public String getHelloMessageWorld(){
-        return "Hello World!";
-    }
+
+	@GetMapping("/admin")
+	public String getHelloMessageForAdmin() {
+		return "Hello Master!";
+	}
+
+	@GetMapping("/user")
+	public String getHelloMessageForUser() {
+		return "User huh...";
+	}
+
+	@GetMapping
+	public String getHelloMessage() {
+		return "Hello!";
+	}
+
+	@GetMapping("/world")
+	public String getHelloMessageWorld() {
+		return "Hello World!";
+	}
 }
